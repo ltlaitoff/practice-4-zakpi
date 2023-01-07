@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button onclick="addShadow()">click</button>
+    <button onclick="numberParagraphs()">click</button>
+
+ 
+    <div class="main">    
+        <div id="first" class="task">
+        
+            <img src="img/ph1.png" alt="-">
+            <img src="img/ph2.png" alt="-">
+            <img src="img/ph3.png" alt="-">
+            <img src="img/ph4.png" alt="-">
+        </div>
+     
+
+         <div id="second" class="task">
+            <p>first</p>
+            <p>second</p>
+            <p>third</p>
+            <p>fourth</p>
+            <p>fifth</p>
+            <p>sixth</p>
+            <p>seventh</p>
+         </div>
+    </div>
+
+    <script>
+        function addShadow() {
+        var images = document.getElementsByTagName('img');
+        for (var i = 0; i < images.length; i++) {
+            images[i].style.boxShadow = '7px 5px 5px #888888';
+        }
+        }   
+    </script>
+    <script>
+        function numberParagraphs(){
+            var paragraphs = document.getElementsByTagName("p");
+            for (var i = 0; i < paragraphs.length; i++) {
+                paragraphs[i].innerHTML = (i+1) + ". " + paragraphs[i].innerHTML;
+            }
+        }
+        </script>
+</body>
+</html>

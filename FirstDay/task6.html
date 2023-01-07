@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<!-- <img src="img/ph3.png" alt="-" onclick="onClick(e)"> -->
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<template>
+    <div>
+      <img @mousedown="changeSize" :style="{ width: size + 'px' }" src="img/ph3.png" />
+    </div>
+  </template>
+  
+  <script>
+  export default {
+    data() {
+      return {
+        size: 100
+      }
+    },
+    methods: {
+      changeSize() {
+        this.size = this.size + 10;
+      }
+    }
+  }
+  </script>
+</body>
+</html>
