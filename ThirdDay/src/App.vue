@@ -5,18 +5,21 @@ export default {
 			searchTerm: '',
 			students: [
 				{
+					id: 0,
 					fullName: 'John Smith',
 					group: 'A',
 					yearOfBirth: 2000,
 					passed: true
 				},
 				{
-					fullName: 'Jane Doe',
+					id: 1,
+					fullName: 'Zack Philips',
 					group: 'B',
 					yearOfBirth: 2001,
 					passed: false
 				},
 				{
+					id: 2,
 					fullName: 'Jack Johnson',
 					group: 'C',
 					yearOfBirth: 2002,
@@ -33,6 +36,10 @@ export default {
 			const loweredSearchTerm = this.searchTerm.toLowerCase()
 
 			return loweredFullName.indexOf(loweredSearchTerm) >= 0
+		},
+		deleteStudent(id) {
+			const index = this.students.findIndex(student => student.id === id)
+			this.students.splice(index, 1)
 		}
 	}
 }
@@ -54,11 +61,12 @@ export default {
 				<th>Group</th>
 				<th>Year of Birth</th>
 				<th>Passed Practical Work</th>
+				<th>Button Delete</th>
 			</tr>
-			<!-- WARNING: key as fullName? -->
+
 			<tr
 				v-for="student in students"
-				:key="student.fullName"
+				:key="student.id"
 				:class="checkStudentOnSearch(student.fullName) && 'studentHighlight'"
 			>
 				<td>{{ student.fullName }}</td>
@@ -69,6 +77,9 @@ export default {
 						type="checkbox"
 						v-model="student.passed"
 					/>
+				</td>
+				<td>
+					<button v-on:click="deleteStudent(student.id)">Delete</button>
 				</td>
 			</tr>
 		</table>
