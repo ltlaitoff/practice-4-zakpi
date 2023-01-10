@@ -3,6 +3,21 @@ export default {
 	data() {
 		return {
 			searchTerm: '',
+			addStudentsState: {
+				id: '1',
+				fullName: '',
+				group: 'A',
+				yearOfBirth: '2022',
+				passed: false
+			},
+			num1: 100,
+			num2: 200,
+			total: '',
+			styleobj: {
+				width: '100px',
+				height: '100px',
+				backgroundColor: 'red'
+			},
 			students: [
 				{
 					id: 0,
@@ -40,13 +55,92 @@ export default {
 		deleteStudent(id) {
 			const index = this.students.findIndex(student => student.id === id)
 			this.students.splice(index, 1)
+		},
+		addStudent() {
+			this.students.push(JSON.parse(JSON.stringify(this.addStudentsState)))
+			this.addStudentsState.id = this.students.length + 1
+			this.addStudentsState.fullName = 'j'
+			this.addStudentsState.group = 'A'
+			this.addStudentsState.yearOfBirth = '2022'
+			this.addStudentsState.passed = false
+		},
+		changebgcolor: function () {
+			this.styleobj.backgroundColor = 'green'
+		},
+		originalcolor: function () {
+			this.styleobj.backgroundColor = 'red'
 		}
 	}
 }
 </script>
 
 <template>
-	<div>
+	<div
+		class="addStudent test"
+		@submit.prevent="addStudent"
+	>
+		<label class="addStudentLabel">
+			fullName
+			<input
+				type="text"
+				v-model="addStudentsState.name"
+			/>
+		</label>
+
+		<label class="addStudentLabel">
+			group
+			<select
+				class="select"
+				v-model="addStudentsState.group"
+			>
+				<div>
+					<input
+						type="radio"
+						name="group"
+						value="A"
+					/>
+					<input
+						type="radio"
+						name="group"
+						value="B"
+					/>
+					<input
+						type="radio"
+						name="group"
+						value="C"
+					/>
+				</div>
+			</select>
+		</label>
+
+		<label class="addStudentLabel">
+			yearOfBirth
+			<input
+				type="dateOfBirthday"
+				v-model="addStudentsState.dateOfBirthday"
+			/>
+		</label>
+
+		<label class="addStudentLabel">
+			passed
+			<input
+				v-model="addStudentsState.practiceWork"
+				type="checkbox"
+			/>
+		</label>
+
+		<button
+			class="addStudentButton"
+			@click="addStudent()"
+		>
+			Add
+		</button>
+		<br />
+		<br />
+		<hr />
+		<br />
+	</div>
+	<div class="test">
 		<label>
 			Search:
 			<input
@@ -84,11 +178,47 @@ export default {
 			</tr>
 		</table>
 	</div>
+	<br />
+	<hr />
+	<br />
+	<div class="test">
+		<h3>Task 1</h3>
+		<span style="font-size: 25px">EnterAge:</span>
+		<input
+			v-model.number="age"
+			type="number"
+		/>
+		<br />
+		<span style="font-size: 25px">EnterMessage:</span>
+		<input v-model.lazy="msg" />
+		<br />
+		<span style="font-size: 25px">EnterMessage :</span>
+		<input v-model.trim="message" />
+	</div>
+	<div
+		id="databinding"
+		class="test"
+	>
+		<br />
+		<hr />
+		<br />
+		<h3>Task 2</h3>
+		<div
+			v-bind:style="styleobj"
+			v-on:mouseover="changebgcolor"
+			v-on:mouseout="originalcolor"
+		></div>
+	</div>
 </template>
 
 <style scoped>
 header {
 	line-height: 1.5;
+}
+.test {
+	justify-content: center;
+	flex-direction: column;
+	align-items: flex-start;
 }
 
 .logo {
@@ -108,9 +238,7 @@ header {
 	}
 
 	header .wrapper {
-		display: flex;
-		place-items: flex-start;
-		flex-wrap: wrap;
+		margin: 0, auto;
 	}
 }
 
