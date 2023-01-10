@@ -7,7 +7,7 @@ export default {
 				id: '1',
 				fullName: '',
 				group: 'A',
-				yearOfBirth: '2022',
+				yearOfBirth: '',
 				passed: false
 			},
 			num1: 100,
@@ -83,7 +83,7 @@ export default {
 			fullName
 			<input
 				type="text"
-				v-model="addStudentsState.name"
+				v-model="addStudentsState.fullName"
 			/>
 		</label>
 
@@ -93,23 +93,9 @@ export default {
 				class="select"
 				v-model="addStudentsState.group"
 			>
-				<div>
-					<input
-						type="radio"
-						name="group"
-						value="A"
-					/>
-					<input
-						type="radio"
-						name="group"
-						value="B"
-					/>
-					<input
-						type="radio"
-						name="group"
-						value="C"
-					/>
-				</div>
+				<option value="A">A</option>
+				<option value="B">B</option>
+				<option value="C">C</option>
 			</select>
 		</label>
 
@@ -117,14 +103,14 @@ export default {
 			yearOfBirth
 			<input
 				type="dateOfBirthday"
-				v-model="addStudentsState.dateOfBirthday"
+				v-model="addStudentsState.yearOfBirth"
 			/>
 		</label>
 
 		<label class="addStudentLabel">
 			passed
 			<input
-				v-model="addStudentsState.practiceWork"
+				v-model="addStudentsState.passed"
 				type="checkbox"
 			/>
 		</label>
