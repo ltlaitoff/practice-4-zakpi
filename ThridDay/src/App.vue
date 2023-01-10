@@ -24,100 +24,28 @@ export default {
 				}
 			]
 		}
+	},
+	methods: {
+		checkStudentOnSearch(fullName) {
+			if (this.searchTerm === '') return
+
+			const loweredFullName = fullName.toLowerCase()
+			const loweredSearchTerm = this.searchTerm.toLowerCase()
+
+			return loweredFullName.indexOf(loweredSearchTerm) >= 0
+		}
 	}
 }
-// const studentsArr = [
-// 	{
-// 		id: 0,
-// 		name: 'Jaleel',
-// 		surname: 'Medhurst',
-// 		practiceWork: true
-// 	},
-// 	{
-// 		id: 1,
-// 		name: 'Ida',
-// 		surname: 'Addison',
-// 		practiceWork: false
-// 	},
-// 	{
-// 		id: 2,
-// 		name: 'Hipolito',
-// 		surname: 'Dexter',
-// 		practiceWork: true
-// 	},
-// 	{
-// 		id: 3,
-// 		name: 'Myah',
-// 		surname: 'Sally',
-// 		practiceWork: false
-// 	},
-// 	{
-// 		id: 4,
-// 		name: 'Helen',
-// 		surname: 'Bethany',
-// 		patronymic: 'Isom',
-// 		group: '2',
-// 		dateOfBirthday: '07/02/2002',
-// 		practiceWork: true
-// 	},
-// 	{
-// 		id: 5,
-// 		name: 'Luisa',
-// 		surname: 'Amalia',
-// 		practiceWork: false
-// 	},
-// 	{
-// 		id: 6,
-// 		name: 'Donnell',
-// 		surname: 'Davin',
-// 		practiceWork: false
-// 	}
-// ]
-// const students = reactive(studentsArr)
-// const filter = ref('')
 </script>
 
 <template>
-	<!-- <input
-		type="text"
-		v-model="filter"
-	/>
-
-	<table class="table">
-		<tr class="tableHead">
-			<th class="tableHeadItem">FullName</th>
-			<th class="tableHeadItem">PracticeWork</th>
-		</tr>
-		<tr
-			class="tableContent"
-			v-for="student in students"
-			:key="student.id"
-		>
-			<td
-				:class="[
-					'tableContentItem',
-					filter !== '' &&
-						`${student.surname} ${student.name} `.indexOf(filter) >= 0 &&
-						'tableContentItemColor'
-				]"
-			>
-				{{ `${student.surname} ${student.name} ` }}
-			</td>
-			<td class="tableContentItem">
-				<input
-					type="checkbox"
-					v-model="student.practiceWork"
-				/>
-			</td>
-
-			<button @click="deleteItem(student.id)">Delete</button>
-		</tr>
-	</table> -->
 	<div>
+		<!-- TODO: Add label -->
 		<input
 			type="text"
 			v-model="searchTerm"
 		/>
+
 		<table>
 			<tr>
 				<th>Full Name</th>
@@ -125,10 +53,11 @@ export default {
 				<th>Year of Birth</th>
 				<th>Passed Practical Work</th>
 			</tr>
+			<!-- WARNING: key as fullName? -->
 			<tr
 				v-for="student in students"
 				:key="student.fullName"
-				v-if="student.fullName.includes(searchTerm)"
+				:class="checkStudentOnSearch(student.fullName) && 'studentHighlight'"
 			>
 				<td>{{ student.fullName }}</td>
 				<td>{{ student.group }}</td>
@@ -170,5 +99,9 @@ header {
 		place-items: flex-start;
 		flex-wrap: wrap;
 	}
+}
+
+.studentHighlight {
+	color: red;
 }
 </style>
