@@ -40,11 +40,13 @@ export default {
 
 <template>
 	<div>
-		<!-- TODO: Add label -->
-		<input
-			type="text"
-			v-model="searchTerm"
-		/>
+		<label>
+			Search:
+			<input
+				type="text"
+				v-model="searchTerm"
+			/>
+		</label>
 
 		<table>
 			<tr>
